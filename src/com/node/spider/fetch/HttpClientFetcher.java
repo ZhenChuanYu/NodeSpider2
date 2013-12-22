@@ -2,7 +2,7 @@ package com.node.spider.fetch;
 
 import com.node.spider.pubclass.Link;
 
-public class HttpClientFetcher extends Fetcher {
+class HttpClientFetcher extends Fetcher {
 
 	public HttpClientFetcher() {
 	}

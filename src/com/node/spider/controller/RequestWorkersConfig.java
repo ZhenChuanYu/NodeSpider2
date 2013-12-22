@@ -1,9 +1,9 @@
 package com.node.spider.controller;
 
-public class ControllerConfig {
+public class RequestWorkersConfig {
 	public int workerNum;
 
-	public ControllerConfig(int workerNum) {
+	public RequestWorkersConfig(int workerNum) {
 		this.workerNum=workerNum;
 	}
 }

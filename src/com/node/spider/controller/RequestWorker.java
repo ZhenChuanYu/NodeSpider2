@@ -1,10 +1,9 @@
 package com.node.spider.controller;
 
 import com.node.spider.fetch.Fetcher;
-import com.node.spider.fetch.UrlConnectionFetcher;
 import com.node.spider.pubclass.Link;
 
-class Worker extends Thread {
+class RequestWorker extends Thread {
 
 	TaskQueue taskQueue;
 	Fetcher fetcher;
@@ -12,14 +11,14 @@ class Worker extends Thread {
 	boolean isBusy = false;
 	final long SLEEPWHILE = 100l;// 100ms
 
-	public Worker(TaskQueue taskQueue) {
+	public RequestWorker(TaskQueue taskQueue) {
 		this(taskQueue, null);
 	}
 
-	public Worker(TaskQueue taskQueue, Fetcher fetcher) {
+	public RequestWorker(TaskQueue taskQueue, Fetcher fetcher) {
 		this.taskQueue = taskQueue;
 		if (fetcher == null) {
-			this.fetcher = new UrlConnectionFetcher();
+			this.fetcher = Fetcher.newFetcher(Fetcher.Type.UrlConnection);
 		} else {
 			this.fetcher = fetcher;
 		}

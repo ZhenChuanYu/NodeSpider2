@@ -1,11 +1,7 @@
 package com.node.spider.main;
 
 import com.node.spider.controller.Dispatcher;
-import com.node.spider.fetch.Fetcher;
-import com.node.spider.fetch.UrlConnectionFetcher;
 import com.node.spider.pubclass.Link;
-import com.node.spider.pubclass.Website;
-import com.node.spider.pubutil.ConfigLoader;
 import com.node.spider.pubutil.Log;
 
 public class SpiderApplication implements Application {
@@ -58,7 +54,7 @@ public class SpiderApplication implements Application {
 		Log.i(NAME + " created" + "\n");
 		dispater = new Dispatcher();
 		for (String url : link) {
-			Link l = new Link(url);
+			Link l = new Link(url).setDefaultConfig();
 			dispater.offer(l);
 		}
 	}

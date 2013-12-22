@@ -5,9 +5,9 @@ import java.util.PriorityQueue;
 
 import com.node.spider.pubclass.Link;
 
-public class TaskQueuePriority implements TaskQueue {
+public class RequestQueuePriority implements TaskQueue {
 
-	public TaskQueuePriority() {
+	public RequestQueuePriority() {
 	};
 
 	PriorityQueue<Link> taskQueue;
