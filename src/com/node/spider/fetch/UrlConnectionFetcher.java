@@ -32,6 +32,7 @@ class UrlConnectionFetcher extends Fetcher {
 	public void fetch(Link link) {
 		URL url;
 		try {
+			addCookie(link);
 			url = new URL(link.url);
 			HttpURLConnection connect = (HttpURLConnection) url
 					.openConnection();

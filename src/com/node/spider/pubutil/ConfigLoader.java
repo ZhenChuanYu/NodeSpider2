@@ -21,7 +21,18 @@ public class ConfigLoader {
 		return loader;
 	}
 
-	public <T> T loadConfig(Class<T> cl,String configPath) {
+	/**
+	 * 加载key value 属性的
+	 * @param configPath
+	 * @return
+	 */
+	public Map<String, String> loadKeyValueConfig(String configPath) {
+		Map<String, String> keyValue = FileUtil
+				.readKeyValueConfigFile(configPath);
+		return keyValue == null ? new HashMap<String, String>() : keyValue;
+	}
+
+	public <T> T loadConfig(Class<T> cl, String configPath) {
 		try {
 			T config = cl.newInstance();
 			Map<String, String> map = FileUtil
@@ -57,7 +68,8 @@ public class ConfigLoader {
 			IllegalAccessException, InvocationTargetException {
 		String first = new String(new char[] { domainName.charAt(0) });
 		String other = domainName.substring(1, domainName.length());
-		Method m = cl.getDeclaredMethod("set" + first.toUpperCase() + other, String.class);
+		Method m = cl.getDeclaredMethod("set" + first.toUpperCase() + other,
+				String.class);
 		m.invoke(instance, value);
 	}
 }

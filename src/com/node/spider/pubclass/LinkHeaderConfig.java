@@ -17,4 +17,13 @@ public abstract class LinkHeaderConfig {
 		headers.add(namevalue);
 		return this;
 	}
+
+	public String getHeaderValueOfName(String key) {
+		for (NameValuePair<String, String> pair : headers) {
+			if (pair.getName().equals(key)) {
+				return pair.getValue();
+			}
+		}
+		return null;
+	}
 }

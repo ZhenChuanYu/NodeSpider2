@@ -2,7 +2,6 @@ package com.node.spider.pubclass;
 
 import java.util.List;
 
-
 /**
  * 需要爬取的url链接
  * 
@@ -80,5 +79,22 @@ public class Link {
 		retryCount = 3;
 		currentRetryTime = 0;
 		return this;
+	}
+
+	public Link addCookie(String cookie) {
+		if (headerConfig == null) {
+			headerConfig = new LinkHeaderConfigDefault();
+		}
+		headerConfig.addNameValue(new NameValuePair<String, String>(
+				HttpHeader.COOKIE, cookie));
+		return this;
+	}
+
+	public String getCookie() {
+		if (headerConfig == null) {
+			return null;
+		} else {
+			return headerConfig.getHeaderValueOfName(HttpHeader.COOKIE);
+		}
 	}
 }

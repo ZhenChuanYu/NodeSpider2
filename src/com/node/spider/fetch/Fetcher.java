@@ -1,5 +1,9 @@
 package com.node.spider.fetch;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import com.node.spider.cookie.CookieManager;
 import com.node.spider.pubclass.Link;
 
 public abstract class Fetcher {
@@ -23,7 +27,6 @@ public abstract class Fetcher {
 		public String getValue() {
 			return value;
 		}
-
 	}
 
 	public static Fetcher newFetcher(Fetcher.Type type) {
@@ -44,5 +47,10 @@ public abstract class Fetcher {
 	public Fetcher setCallbask(FetchCallback callback) {
 		this.callback = callback;
 		return this;
+	}
+
+	public void addCookie(Link link) throws MalformedURLException {
+		link.addCookie(CookieManager.getInstance().getUrlCookie(
+				new URL(link.url).getHost()));
 	}
 }
