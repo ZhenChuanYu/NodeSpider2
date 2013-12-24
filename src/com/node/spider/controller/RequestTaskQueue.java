@@ -2,7 +2,7 @@ package com.node.spider.controller;
 
 import com.node.spider.pubclass.Link;
 
-public interface TaskQueue {
+public interface RequestTaskQueue {
 
 	Link poll();
 

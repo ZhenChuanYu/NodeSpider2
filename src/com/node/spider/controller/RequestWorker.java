@@ -5,17 +5,17 @@ import com.node.spider.pubclass.Link;
 
 class RequestWorker extends Thread {
 
-	TaskQueue taskQueue;
+	RequestTaskQueue taskQueue;
 	Fetcher fetcher;
 	boolean running = true;
 	boolean isBusy = false;
 	final long SLEEPWHILE = 100l;// 100ms
 
-	public RequestWorker(TaskQueue taskQueue) {
+	public RequestWorker(RequestTaskQueue taskQueue) {
 		this(taskQueue, null);
 	}
 
-	public RequestWorker(TaskQueue taskQueue, Fetcher fetcher) {
+	public RequestWorker(RequestTaskQueue taskQueue, Fetcher fetcher) {
 		this.taskQueue = taskQueue;
 		if (fetcher == null) {
 			this.fetcher = Fetcher.newFetcher(Fetcher.Type.UrlConnection);

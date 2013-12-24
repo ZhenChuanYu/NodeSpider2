@@ -5,7 +5,7 @@ import java.util.PriorityQueue;
 
 import com.node.spider.pubclass.Link;
 
-public class RequestQueuePriority implements TaskQueue {
+public class RequestQueuePriority implements RequestTaskQueue {
 
 	public RequestQueuePriority() {
 	};

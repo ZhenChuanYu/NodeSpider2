@@ -7,6 +7,7 @@ import com.node.spider.fetch.FetchCallback;
 import com.node.spider.fetch.Fetcher;
 import com.node.spider.fetch.Fetcher.Type;
 import com.node.spider.pubclass.Link;
+import com.node.spider.pubclass.ParserTask;
 import com.node.spider.pubutil.Log;
 
 /**
@@ -18,11 +19,11 @@ import com.node.spider.pubutil.Log;
  * @author zhenchuan
  * 
  */
-public class Dispatcher implements TaskQueue {
+public class Dispatcher implements RequestTaskQueue, ParserTaskQueue {
 
 	RequestWorkersConfig config;
 	RequestWorker[] workers;
-	TaskQueue requestQueue;
+	RequestTaskQueue requestQueue;
 	final static int DEFAULT_REQUEST_WORKER_NUM = 3;// 默认为3个线程
 
 	public Dispatcher setConfig(RequestWorkersConfig config) {
@@ -30,7 +31,7 @@ public class Dispatcher implements TaskQueue {
 		return this;
 	}
 
-	public Dispatcher setTaskQueue(TaskQueue queue) {
+	public Dispatcher setTaskQueue(RequestTaskQueue queue) {
 		this.requestQueue = queue;
 		return this;
 	}
@@ -95,6 +96,7 @@ public class Dispatcher implements TaskQueue {
 				Log.i("response header is " + responseHeader.toString());
 				Log.i("throw link to parser queue");
 				// add link to parsertaskqueue
+				offer(ParserTask.newParserTask(link, result, responseHeader));
 			}
 
 			@Override
@@ -146,4 +148,13 @@ public class Dispatcher implements TaskQueue {
 		requestQueue.offer(l);
 	}
 
+	@Override
+	public ParserTask pollParserTask() {
+		return null;
+	}
+
+	@Override
+	public void offer(ParserTask task) {
+
+	}
 }
