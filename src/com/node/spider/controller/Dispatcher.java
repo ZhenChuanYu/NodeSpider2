@@ -21,36 +21,57 @@ import com.node.spider.pubutil.Log;
  */
 public class Dispatcher implements RequestTaskQueue, ParserTaskQueue {
 
-	RequestWorkersConfig config;
-	RequestWorker[] workers;
+	/*
+	 * fetch部分
+	 */
+	RequestWorkersConfig rConfig;
+	RequestWorker[] rWorkers;
 	RequestTaskQueue requestQueue;
-	final static int DEFAULT_REQUEST_WORKER_NUM = 3;// 默认为3个线程
+	final static int DEFAULT_REQUEST_WORKER_NUM = 5;// 默认为5个线程
 
-	public Dispatcher setConfig(RequestWorkersConfig config) {
-		this.config = config;
+	/*
+	 * parser部分
+	 */
+	ParserWorkersConfig pConfig;
+	ParserWorker[] pWorkers;
+	ParserTaskQueue parserQueue;
+	final static int DEFAULT_PARSER_WORKER_NUM = 3;// 默认为3个线程
+
+	public Dispatcher setRequestWorkersConfig(RequestWorkersConfig config) {
+		this.rConfig = config;
 		return this;
 	}
 
-	public Dispatcher setTaskQueue(RequestTaskQueue queue) {
+	public Dispatcher setRequestTaskQueue(RequestTaskQueue queue) {
 		this.requestQueue = queue;
 		return this;
 	}
 
-	public Dispatcher(RequestWorkersConfig config) {
-		setConfig(config);
-		requestQueue = new RequestQueuePriority();
+	public Dispatcher setParserWorkersConfig(ParserWorkersConfig config) {
+		this.pConfig = config;
+		return this;
+	}
+
+	public Dispatcher setParserTaskQueue(ParserTaskQueue queue) {
+		this.parserQueue = queue;
+		return this;
+	}
+
+	public Dispatcher(RequestWorkersConfig rConfig, ParserWorkersConfig pConfig) {
+		setRequestWorkersConfig(rConfig).setParserWorkersConfig(pConfig);
 	}
 
 	public Dispatcher() {
-		this(new RequestWorkersConfig(DEFAULT_REQUEST_WORKER_NUM));
+		this(new RequestWorkersConfig(DEFAULT_REQUEST_WORKER_NUM),
+				new ParserWorkersConfig(DEFAULT_PARSER_WORKER_NUM));
 	}
 
 	private void initRequestWorkers() {
-		if (workers == null) {
-			workers = new RequestWorker[config.workerNum];
-			for (int i = 0; i < config.workerNum; i++) {
-				workers[i] = newRequestWorker();
-				workers[i].start();
+		if (rWorkers == null) {
+			rWorkers = new RequestWorker[rConfig.workerNum];
+			for (int i = 0; i < rConfig.workerNum; i++) {
+				rWorkers[i] = newRequestWorker();
+				rWorkers[i].start();
 			}
 		}
 	}
@@ -120,19 +141,19 @@ public class Dispatcher implements RequestTaskQueue, ParserTaskQueue {
 	}
 
 	public void stopAllRequestWorkers() {
-		if (workers == null) {
+		if (rWorkers == null) {
 			return;
 		}
-		for (RequestWorker worker : workers) {
+		for (RequestWorker worker : rWorkers) {
 			worker.running = false;
 		}
 	}
 
 	public void shutdownAllRequestWorkers() {
-		if (workers == null) {
+		if (rWorkers == null) {
 			return;
 		}
-		for (RequestWorker worker : workers) {
+		for (RequestWorker worker : rWorkers) {
 			worker.shutdown();
 		}
 	}

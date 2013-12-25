@@ -18,4 +18,8 @@ public class CharsetUtils {
 			return DEFAULT_CHARSET;
 		}
 	}
+
+	public static String defaultCharset() {
+		return DEFAULT_CHARSET;
+	}
 }

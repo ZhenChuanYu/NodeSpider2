@@ -2,6 +2,7 @@ package com.node.spider.pubclass;
 
 import com.node.spider.pubclass.HttpHeader;
 import com.node.spider.pubclass.NameValuePair;
+import com.node.spider.pubutil.CharsetUtils;
 
 public class LinkHeaderConfigDefault extends LinkHeaderConfig {
 	String DEFAULT_ACCEPT = "*/*";
@@ -9,6 +10,7 @@ public class LinkHeaderConfigDefault extends LinkHeaderConfig {
 	String DEFAULT_ACCEPT_ENCODING = "gzip,deflate,sdch";
 	String DEFAULT_CONNECTION = "keep-alive";
 	String DEFAULT_USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36";
+	String DEFAULT_CHARSET = CharsetUtils.defaultCharset();
 
 	public LinkHeaderConfigDefault() {
 		super();
@@ -28,6 +30,9 @@ public class LinkHeaderConfigDefault extends LinkHeaderConfig {
 								HttpHeader.CONNECTION, DEFAULT_CONNECTION))
 				.addNameValue(
 						new NameValuePair<String, String>(
-								HttpHeader.USER_AGENT, DEFAULT_USER_AGENT));
+								HttpHeader.USER_AGENT, DEFAULT_USER_AGENT))
+				.addNameValue(
+						new NameValuePair<String, String>(
+								HttpHeader.ACCEPT_CHARSET, DEFAULT_CHARSET));
 	}
 }
