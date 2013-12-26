@@ -86,7 +86,6 @@ class UrlConnectionFetcher extends Fetcher {
 								connect.getHeaderFields());
 					}
 
-					System.out.println(new String(result, "UTF-8"));
 					try {
 						bos.close();
 						is.close();
