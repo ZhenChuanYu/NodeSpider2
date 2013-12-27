@@ -8,4 +8,9 @@ public class UrlLinkParser extends Parser {
 	public void parse(ParserTask parserTask) {
 		
 	}
+
+	@Override
+	public Parser clone() throws CloneNotSupportedException {
+		return null;
+	}
 }

@@ -9,4 +9,9 @@ public class ImageResourceParser extends Parser {
 
 	}
 
+	@Override
+	public Parser clone() throws CloneNotSupportedException {
+		return null;
+	}
+
 }

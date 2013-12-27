@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.node.spider.pubclass.Link;
 
-public interface FetchCallback {
+public interface FetchCallback extends Cloneable{
 	// 在请求发出之前
 	void onBeforeFetch(Fetcher.Type fetcherType, Link link,
 			Map<String, List<String>> requestHeader);
@@ -23,4 +23,6 @@ public interface FetchCallback {
 
 	// 抓取失败 -- 网络IO异常（无网络？）
 	void onNetWorkIOError(Fetcher.Type fetcherType, Link link);
+	
+	FetchCallback clone() throws CloneNotSupportedException;
 }

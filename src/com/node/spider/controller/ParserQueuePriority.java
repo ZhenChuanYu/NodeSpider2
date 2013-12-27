@@ -24,12 +24,12 @@ public class ParserQueuePriority implements ParserTaskQueue {
 	}
 
 	@Override
-	public ParserTask pollParserTask() {
+	public synchronized ParserTask pollParserTask() {
 		return taskQueue.poll();
 	}
 
 	@Override
-	public void offer(ParserTask task) {
+	public synchronized void offer(ParserTask task) {
 		taskQueue.offer(task);
 	}
 

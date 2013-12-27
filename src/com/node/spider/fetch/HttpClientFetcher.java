@@ -12,4 +12,9 @@ class HttpClientFetcher extends Fetcher {
 
 	}
 
+	@Override
+	public Fetcher clone() throws CloneNotSupportedException {
+		return null;
+	}
+
 }

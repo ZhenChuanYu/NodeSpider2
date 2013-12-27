@@ -9,4 +9,11 @@ public class DefaultParser extends Parser {
 		
 	}
 
+	@Override
+	public Parser clone() throws CloneNotSupportedException {
+		Parser p = new DefaultParser();
+		p.setParserCallback(this.callback.clone());
+		return p;
+	}
+
 }

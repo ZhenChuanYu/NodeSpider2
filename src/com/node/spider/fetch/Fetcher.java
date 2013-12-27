@@ -6,7 +6,7 @@ import java.net.URL;
 import com.node.spider.cookie.CookieManager;
 import com.node.spider.pubclass.Link;
 
-public abstract class Fetcher {
+public abstract class Fetcher implements Cloneable {
 
 	protected FetchCallback callback;
 
@@ -53,4 +53,8 @@ public abstract class Fetcher {
 		link.addCookie(CookieManager.getInstance().getUrlCookie(
 				new URL(link.url).getHost()));
 	}
+
+	@Override
+	public abstract Fetcher clone() throws CloneNotSupportedException;
+
 }

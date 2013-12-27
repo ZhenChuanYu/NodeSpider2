@@ -120,4 +120,11 @@ class UrlConnectionFetcher extends Fetcher {
 			}
 		}
 	}
+
+	@Override
+	public Fetcher clone() throws CloneNotSupportedException {
+		Fetcher f = new UrlConnectionFetcher();
+		f.setCallbask(callback.clone());
+		return f;
+	}
 }

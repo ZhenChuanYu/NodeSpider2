@@ -17,11 +17,7 @@ class RequestWorker extends Thread {
 
 	public RequestWorker(RequestTaskQueue taskQueue, Fetcher fetcher) {
 		this.taskQueue = taskQueue;
-		if (fetcher == null) {
-			this.fetcher = Fetcher.newFetcher(Fetcher.Type.UrlConnection);
-		} else {
-			this.fetcher = fetcher;
-		}
+		this.fetcher = fetcher;
 	}
 
 	public void stopSilent() {

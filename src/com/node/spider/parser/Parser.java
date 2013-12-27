@@ -2,7 +2,9 @@ package com.node.spider.parser;
 
 import com.node.spider.pubclass.ParserTask;
 
-public abstract class Parser {
+public abstract class Parser implements Cloneable {
+
+	protected ParserCallback callback;
 
 	public Parser() {
 
@@ -34,4 +36,11 @@ public abstract class Parser {
 			return new UrlLinkParser();
 		}
 	}
+
+	public void setParserCallback(ParserCallback callback) {
+		this.callback = callback;
+	}
+
+	@Override
+	public abstract Parser clone() throws CloneNotSupportedException;
 }
